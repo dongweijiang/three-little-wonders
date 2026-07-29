@@ -518,44 +518,32 @@ a:focus-visible {
 
 .spotify-embed iframe { width: 100%; height: 80px; border: 0; }
 
-.mobile-play-prompt {
+.mobile-play-hint {
   position: absolute;
-  top: 0;
-  right: 0;
+  right: 10px;
+  bottom: 88px;
   z-index: 3;
-  display: flex;
-  width: min(430px, calc(100% - 164px));
-  height: 80px;
+  display: none;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(22, 15, 31, 0.96), rgba(73, 39, 76, 0.94));
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.32);
+  border-radius: 999px;
+  background: rgba(22, 15, 31, 0.92);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
   color: rgba(255, 255, 255, 0.94);
-  cursor: pointer;
   font-family: "Microsoft YaHei", sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
   transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 }
 
-.mobile-play-prompt span {
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--paper);
-  color: #100914;
-  font-size: 11px;
-}
-
-.mobile-play-prompt.is-hidden {
+.mobile-play-hint.is-hidden {
   visibility: hidden;
   opacity: 0;
-  pointer-events: none;
   transform: translateY(5px);
 }
 
@@ -693,7 +681,7 @@ a:focus-visible {
   .brand { font-size: 11px; }
   .brand-mark { width: 28px; height: 28px; }
   .music-label { display: none; }
-  .music-toggle { width: 38px; height: 38px; justify-content: center; padding: 0; }
+  .music-toggle { display: none; }
   .scene-copy { top: 20%; left: 24px; width: calc(100% - 48px); transform: none; }
   .chapter { margin-bottom: 14px; font-size: 10px; }
   .scene h2 { font-size: clamp(42px, 13vw, 66px); }
@@ -705,7 +693,7 @@ a:focus-visible {
   .page-dots { top: auto; right: 50%; bottom: max(124px, calc(env(safe-area-inset-bottom) + 110px)); flex-direction: row; gap: 4px; transform: translateX(50%); }
   .page-dot { width: 30px; height: 30px; }
   .music-dock { left: 18px; right: 18px; bottom: max(14px, env(safe-area-inset-bottom)); grid-template-columns: 90px 1fr; gap: 10px; max-width: none; }
-  .mobile-play-prompt { width: calc(100% - 100px); font-size: 11px; }
+  .mobile-play-hint { display: flex; }
   .track-meta strong { white-space: normal; line-height: 1.45; }
   .music-status { display: none; }
   .next-button { display: none; }
