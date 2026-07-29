@@ -28,12 +28,12 @@
 
     <div id="pages" class="pages">
       <section id="scene-1" class="scene scene-heart" aria-label="第一幕 心动轨迹">
-        <canvas id="heartCanvas" aria-hidden="true"></canvas>
+        <canvas id="heartCanvas" role="button" tabindex="0" aria-label="点击扰动爱心粒子"></canvas>
         <div class="halo" aria-hidden="true"></div>
         <div class="scene-copy">
           <p class="chapter"><span>01</span> 心动轨迹</p>
           <h2>让光点<br />组成一颗心</h2>
-          <p class="scene-note">每一次旋转，都是宇宙里温柔的回声。</p>
+          <p class="scene-note">点击爱心，光点会散开，再慢慢回到彼此身边。</p>
         </div>
         <p class="ambient-word ambient-love" aria-hidden="true">LOVE</p>
       </section>
@@ -41,37 +41,28 @@
       <section id="scene-2" class="scene scene-christmas" aria-label="第二幕 冬日来信">
         <canvas id="snowCanvas" aria-hidden="true"></canvas>
         <div class="moon" aria-hidden="true"></div>
-        <div class="tree-wrap" aria-hidden="true">
-          <div class="tree-star">✦</div>
-          <div class="tree">
-            <div class="tree-layer layer-1"></div>
-            <div class="tree-layer layer-2"></div>
-            <div class="tree-layer layer-3"></div>
-            <div class="tree-layer layer-4"></div>
-            <span class="ornament o1"></span><span class="ornament o2"></span>
-            <span class="ornament o3"></span><span class="ornament o4"></span>
-            <span class="ornament o5"></span><span class="ornament o6"></span>
-            <div class="garland garland-a"></div>
-            <div class="garland garland-b"></div>
+        <div class="tree-wrap">
+          <div class="tree-stage">
+            <canvas id="treeCanvas" role="application" tabindex="0" aria-label="可拖拽旋转的三维圣诞树，使用拖拽或方向键旋转"></canvas>
+            <div class="tree-ground" aria-hidden="true"></div>
           </div>
-          <div class="trunk"></div>
-          <div class="snow-bank"></div>
+          <p class="interaction-hint tree-hint"><span aria-hidden="true">↔</span> 拖拽旋转圣诞树</p>
         </div>
         <div class="scene-copy">
           <p class="chapter"><span>02</span> 冬日来信</p>
           <h2>雪落时<br />灯火正温柔</h2>
-          <p class="scene-note">愿每一片雪花，都带来一点小小的快乐。</p>
+          <p class="scene-note">拖动树体，从不同角度看灯火与雪落。</p>
         </div>
         <p class="ambient-word ambient-winter" aria-hidden="true">WINTER</p>
       </section>
 
       <section id="scene-3" class="scene scene-galaxy" aria-label="第三幕 银河漫游">
-        <canvas id="galaxyCanvas" aria-hidden="true"></canvas>
+        <canvas id="galaxyCanvas" role="button" tabindex="0" aria-label="点击发光星点发射彩色流星"></canvas>
         <div class="planet" aria-hidden="true"><span></span></div>
         <div class="scene-copy">
           <p class="chapter"><span>03</span> 银河漫游</p>
           <h2>奔赴星斗<br />也奔赴自由</h2>
-          <p class="scene-note">抬头看，遥远的星光正在抵达此刻。</p>
+          <p class="scene-note">点击彩色光点，让不同颜色的流星划过银河。</p>
         </div>
         <p class="ambient-word ambient-galaxy" aria-hidden="true">GALAXY</p>
       </section>
@@ -90,6 +81,6 @@
 
     <div class="swipe-hint" aria-hidden="true"><span></span>向上滑动</div>
 
-    <script src="./site.js?v=7"></script>
+    <script src="./site.js?v=8"></script>
   </body>
 </html>
