@@ -2,40 +2,22 @@
   "use strict";
 
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const mobile = matchMedia("(max-width: 760px)").matches;
   const pages = document.getElementById("pages");
   const dots = [...document.querySelectorAll(".page-dot")];
   const nextButton = document.getElementById("nextButton");
   const nextLabel = nextButton.querySelector(".next-label");
   const welcome = document.getElementById("welcome");
   const enterButton = document.getElementById("enterButton");
-  const musicToggle = document.getElementById("musicToggle");
-  const musicDock = document.getElementById("musicDock");
-  const musicLabel = musicToggle.querySelector(".music-label");
-  const trackTitle = document.getElementById("trackTitle");
-  const trackChapter = document.getElementById("trackChapter");
-  const musicStatus = document.getElementById("musicStatus");
-  const spotifyEmbed = document.getElementById("spotifyEmbed");
-  const mobilePlayHint = document.getElementById("mobilePlayHint");
-
-  const tracks = [
-    { uri: "spotify:track:1ivCIgrYZyE0BvItL4Z8lk", title: "告白气球 · 周杰伦" },
-    { uri: "spotify:track:1D2VKBUzXO0EpNtmY0POJi", title: "Jingle Bells · Children Love to Sing" },
-    { uri: "spotify:track:3Uw9U1f3PT7Qot9frhpPWX", title: "银河与星斗 · yihuik 苡慧" },
-  ];
+  const sceneCount = 3;
 
   let currentPage = 0;
   let wheelLocked = false;
   let touchStartY = 0;
   let touchStartX = 0;
-  let musicEnabled = true;
-  let spotifyController = null;
-  let spotifyApi = null;
-  let spotifyReady = false;
   let entered = false;
 
   function clampPage(value) {
-    return Math.max(0, Math.min(tracks.length - 1, value));
+    return Math.max(0, Math.min(sceneCount - 1, value));
   }
 
   function changePage(next, force = false) {
@@ -49,87 +31,21 @@
       dot.setAttribute("aria-current", index === currentPage ? "page" : "false");
     });
 
-    const last = currentPage === tracks.length - 1;
+    const last = currentPage === sceneCount - 1;
     nextButton.classList.toggle("is-last", last);
     nextButton.setAttribute("aria-label", last ? "返回第一幕" : "前往下一幕");
     nextLabel.textContent = last ? "回到开场" : "下一幕";
-    trackChapter.textContent = `SCENE 0${currentPage + 1}`;
-    trackTitle.textContent = tracks[currentPage].title;
-    if (entered) loadTrack(currentPage);
   }
-
-  function createSpotifyController() {
-    if (!spotifyApi || spotifyController) return;
-    spotifyApi.createController(
-      spotifyEmbed,
-      { uri: tracks[currentPage].uri, width: "100%", height: 80, theme: "dark" },
-      (controller) => {
-        spotifyController = controller;
-        controller.addListener("ready", () => {
-          spotifyReady = true;
-          musicStatus.textContent = mobile ? "请点击播放器原生播放键" : "音乐已就绪";
-          mobilePlayHint.classList.remove("is-hidden");
-          if (musicEnabled && !mobile) controller.resume();
-        });
-        controller.addListener("playback_update", (event) => {
-          const isPaused = event?.data?.isPaused;
-          if (isPaused === false) {
-            musicStatus.textContent = "正在播放官方音源";
-            mobilePlayHint.classList.add("is-hidden");
-          } else if (isPaused === true && entered && musicEnabled) {
-            musicStatus.textContent = "请点击播放器原生播放键";
-            mobilePlayHint.classList.remove("is-hidden");
-          }
-        });
-      },
-    );
-  }
-
-  function loadTrack(index) {
-    musicStatus.textContent = "正在切换官方音源…";
-    mobilePlayHint.classList.remove("is-hidden");
-    if (!spotifyController) return createSpotifyController();
-    spotifyReady = false;
-    if (typeof spotifyController.loadEntity === "function") {
-      spotifyController.loadEntity(tracks[index].uri);
-    } else {
-      spotifyController.loadUri(tracks[index].uri);
-    }
-  }
-
-  function toggleMusic() {
-    musicEnabled = !musicEnabled;
-    musicToggle.setAttribute("aria-pressed", String(musicEnabled));
-    musicToggle.setAttribute("aria-label", musicEnabled ? "暂停音乐" : "开启音乐");
-    musicLabel.textContent = musicEnabled ? "音乐开启" : "音乐暂停";
-    musicDock.classList.toggle("is-muted", !musicEnabled);
-    if (!spotifyController) return createSpotifyController();
-    if (musicEnabled) {
-      spotifyController.resume();
-      musicStatus.textContent = spotifyReady ? "正在播放官方音源" : "音乐加载中…";
-    } else {
-      spotifyController.pause();
-      musicStatus.textContent = "音乐已暂停";
-      mobilePlayHint.classList.add("is-hidden");
-    }
-  }
-
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    spotifyApi = IFrameAPI;
-    if (entered) createSpotifyController();
-  };
 
   enterButton.addEventListener("click", () => {
     entered = true;
     welcome.classList.add("is-hidden");
-    createSpotifyController();
     changePage(0, true);
     setTimeout(() => welcome.setAttribute("aria-hidden", "true"), 900);
   });
 
-  musicToggle.addEventListener("click", toggleMusic);
   nextButton.addEventListener("click", () => {
-    changePage(currentPage === tracks.length - 1 ? 0 : currentPage + 1);
+    changePage(currentPage === sceneCount - 1 ? 0 : currentPage + 1);
   });
   dots.forEach((dot) => {
     dot.addEventListener("click", () => changePage(Number(dot.dataset.page)));
@@ -173,7 +89,6 @@
       event.preventDefault();
       changePage(currentPage - 1);
     }
-    if (event.key.toLowerCase() === "m") toggleMusic();
   });
 
   function setupCanvas(id) {
