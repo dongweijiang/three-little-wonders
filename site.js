@@ -16,6 +16,7 @@
   const trackChapter = document.getElementById("trackChapter");
   const musicStatus = document.getElementById("musicStatus");
   const spotifyEmbed = document.getElementById("spotifyEmbed");
+  const mobilePlayPrompt = document.getElementById("mobilePlayPrompt");
 
   const tracks = [
     { uri: "spotify:track:1ivCIgrYZyE0BvItL4Z8lk", title: "告白气球 · 周杰伦" },
@@ -66,11 +67,19 @@
         spotifyController = controller;
         controller.addListener("ready", () => {
           spotifyReady = true;
-          musicStatus.textContent = "音乐已就绪；若未自动播放，请点击播放器";
+          musicStatus.textContent = "音乐已就绪，请点击播放";
+          mobilePlayPrompt.classList.remove("is-hidden");
           if (musicEnabled) controller.resume();
         });
         controller.addListener("playback_update", (event) => {
-          if (event?.data?.isPaused === false) musicStatus.textContent = "正在播放官方音源";
+          const isPaused = event?.data?.isPaused;
+          if (isPaused === false) {
+            musicStatus.textContent = "正在播放官方音源";
+            mobilePlayPrompt.classList.add("is-hidden");
+          } else if (isPaused === true && entered && musicEnabled) {
+            musicStatus.textContent = "手机浏览器需要点一下播放";
+            mobilePlayPrompt.classList.remove("is-hidden");
+          }
         });
       },
     );
@@ -78,6 +87,7 @@
 
   function loadTrack(index) {
     musicStatus.textContent = "正在切换官方音源…";
+    mobilePlayPrompt.classList.remove("is-hidden");
     if (!spotifyController) return createSpotifyController();
     spotifyReady = false;
     spotifyController.loadUri(tracks[index].uri);
@@ -96,7 +106,22 @@
     } else {
       spotifyController.pause();
       musicStatus.textContent = "音乐已暂停";
+      mobilePlayPrompt.classList.add("is-hidden");
     }
+  }
+
+  function playFromUserGesture() {
+    musicEnabled = true;
+    musicToggle.setAttribute("aria-pressed", "true");
+    musicToggle.setAttribute("aria-label", "暂停音乐");
+    musicLabel.textContent = "音乐开启";
+    musicDock.classList.remove("is-muted");
+    if (!spotifyController) {
+      musicStatus.textContent = "音乐播放器加载中，请稍候再点一次";
+      return createSpotifyController();
+    }
+    spotifyController.resume();
+    musicStatus.textContent = "正在开始播放…";
   }
 
   window.onSpotifyIframeApiReady = (IFrameAPI) => {
@@ -113,6 +138,7 @@
   });
 
   musicToggle.addEventListener("click", toggleMusic);
+  mobilePlayPrompt.addEventListener("click", playFromUserGesture);
   nextButton.addEventListener("click", () => {
     changePage(currentPage === tracks.length - 1 ? 0 : currentPage + 1);
   });
