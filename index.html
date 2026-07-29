@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090611" />
+    <title>涓夊箷濂囧 路 绮掑瓙瀹囧畽</title>
+    <link rel="preconnect" href="https://open.spotify.com" />
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+
+    <div id="welcome" class="welcome">
+      <div class="welcome-orbit" aria-hidden="true"><span></span></div>
+      <p class="eyebrow">THREE LITTLE WONDERS</p>
+      <h1>涓夊箷濂囧</h1>
+      <p>鎴翠笂鑰虫満锛屽悜涓婃粦鍔?br />绌胯繃蹇冨姩銆佸啲鏃ヤ笌閾舵渤</p>
+      <button id="enterButton" class="enter-button" type="button">
+        <span>寮€鍚梾绋?/span><i aria-hidden="true">鈫?/i>
+      </button>
+      <small>鐐瑰嚮鍚庡姞杞藉畼鏂归煶涔愭挱鏀惧櫒</small>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="#scene-1" aria-label="杩斿洖绗竴骞?>
+        <span class="brand-mark">鉁?/span><span>涓夊箷濂囧</span>
+      </a>
+      <button id="musicToggle" class="music-toggle" type="button" aria-label="鏆傚仠闊充箰" aria-pressed="true">
+        <span class="equalizer" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="music-label">闊充箰寮€鍚?/span>
+      </button>
+    </header>
+
+    <div id="pages" class="pages">
+      <section id="scene-1" class="scene scene-heart" aria-label="绗竴骞?蹇冨姩杞ㄨ抗">
+        <canvas id="heartCanvas" aria-hidden="true"></canvas>
+        <div class="halo" aria-hidden="true"></div>
+        <div class="scene-copy">
+          <p class="chapter"><span>01</span> 蹇冨姩杞ㄨ抗</p>
+          <h2>璁╁厜鐐?br />缁勬垚涓€棰楀績</h2>
+          <p class="scene-note">姣忎竴娆℃棆杞紝閮芥槸瀹囧畽閲屾俯鏌旂殑鍥炲０銆?/p>
+        </div>
+        <p class="ambient-word ambient-love" aria-hidden="true">LOVE</p>
+      </section>
+
+      <section id="scene-2" class="scene scene-christmas" aria-label="绗簩骞?鍐棩鏉ヤ俊">
+        <canvas id="snowCanvas" aria-hidden="true"></canvas>
+        <div class="moon" aria-hidden="true"></div>
+        <div class="tree-wrap" aria-hidden="true">
+          <div class="tree-star">鉁?/div>
+          <div class="tree">
+            <div class="tree-layer layer-1"></div>
+            <div class="tree-layer layer-2"></div>
+            <div class="tree-layer layer-3"></div>
+            <div class="tree-layer layer-4"></div>
+            <span class="ornament o1"></span><span class="ornament o2"></span>
+            <span class="ornament o3"></span><span class="ornament o4"></span>
+            <span class="ornament o5"></span><span class="ornament o6"></span>
+            <div class="garland garland-a"></div>
+            <div class="garland garland-b"></div>
+          </div>
+          <div class="trunk"></div>
+          <div class="snow-bank"></div>
+        </div>
+        <div class="scene-copy">
+          <p class="chapter"><span>02</span> 鍐棩鏉ヤ俊</p>
+          <h2>闆惤鏃?br />鐏伀姝ｆ俯鏌?/h2>
+          <p class="scene-note">鎰挎瘡涓€鐗囬洩鑺憋紝閮藉甫鏉ヤ竴鐐瑰皬灏忕殑蹇箰銆?/p>
+        </div>
+        <p class="ambient-word ambient-winter" aria-hidden="true">WINTER</p>
+      </section>
+
+      <section id="scene-3" class="scene scene-galaxy" aria-label="绗笁骞?閾舵渤婕父">
+        <canvas id="galaxyCanvas" aria-hidden="true"></canvas>
+        <div class="planet" aria-hidden="true"><span></span></div>
+        <div class="scene-copy">
+          <p class="chapter"><span>03</span> 閾舵渤婕父</p>
+          <h2>濂旇荡鏄熸枟<br />涔熷璧磋嚜鐢?/h2>
+          <p class="scene-note">鎶ご鐪嬶紝閬ヨ繙鐨勬槦鍏夋鍦ㄦ姷杈炬鍒汇€?/p>
+        </div>
+        <p class="ambient-word ambient-galaxy" aria-hidden="true">GALAXY</p>
+      </section>
+    </div>
+
+    <aside class="page-dots" aria-label="椤甸潰瀵艰埅">
+      <button class="page-dot active" data-page="0" type="button" aria-label="鍓嶅線绗竴骞?><span>01</span></button>
+      <button class="page-dot" data-page="1" type="button" aria-label="鍓嶅線绗簩骞?><span>02</span></button>
+      <button class="page-dot" data-page="2" type="button" aria-label="鍓嶅線绗笁骞?><span>03</span></button>
+    </aside>
+
+    <div id="musicDock" class="music-dock">
+      <div class="track-meta">
+        <span id="trackChapter">SCENE 01</span>
+        <strong id="trackTitle">鍛婄櫧姘旂悆 路 鍛ㄦ澃浼?/strong>
+      </div>
+      <div id="spotifyEmbed" class="spotify-embed"></div>
+      <p id="musicStatus" class="music-status" aria-live="polite">寮€鍚梾绋嬪悗鍔犺浇闊充箰</p>
+    </div>
+
+    <button id="nextButton" class="next-button" type="button" aria-label="鍓嶅線涓嬩竴骞?>
+      <span class="next-label">涓嬩竴骞?/span>
+      <span class="next-arrow" aria-hidden="true">鈫?/span>
+    </button>
+
+    <div class="swipe-hint" aria-hidden="true"><span></span>鍚戜笂婊戝姩</div>
+
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+    <script src="./site.js"></script>
+  </body>
+</html>
