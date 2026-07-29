@@ -518,6 +518,47 @@ a:focus-visible {
 
 .spotify-embed iframe { width: 100%; height: 80px; border: 0; }
 
+.mobile-play-prompt {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  width: min(430px, calc(100% - 164px));
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(22, 15, 31, 0.96), rgba(73, 39, 76, 0.94));
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.32);
+  color: rgba(255, 255, 255, 0.94);
+  cursor: pointer;
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+
+.mobile-play-prompt span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--paper);
+  color: #100914;
+  font-size: 11px;
+}
+
+.mobile-play-prompt.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(5px);
+}
+
 .music-status {
   grid-column: 2;
   margin: -9px 0 0;
@@ -664,6 +705,7 @@ a:focus-visible {
   .page-dots { top: auto; right: 50%; bottom: max(124px, calc(env(safe-area-inset-bottom) + 110px)); flex-direction: row; gap: 4px; transform: translateX(50%); }
   .page-dot { width: 30px; height: 30px; }
   .music-dock { left: 18px; right: 18px; bottom: max(14px, env(safe-area-inset-bottom)); grid-template-columns: 90px 1fr; gap: 10px; max-width: none; }
+  .mobile-play-prompt { width: calc(100% - 100px); font-size: 11px; }
   .track-meta strong { white-space: normal; line-height: 1.45; }
   .music-status { display: none; }
   .next-button { display: none; }
