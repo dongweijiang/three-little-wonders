@@ -70,6 +70,20 @@ a:focus-visible {
   z-index: -1;
 }
 
+#heartCanvas,
+#galaxyCanvas {
+  z-index: 1;
+  pointer-events: auto;
+  touch-action: pan-y;
+}
+
+#heartCanvas:focus-visible,
+#galaxyCanvas:focus-visible,
+#treeCanvas:focus-visible {
+  outline: 1px solid rgba(255, 214, 138, 0.6);
+  outline-offset: -5px;
+}
+
 .scene-heart {
   background:
     radial-gradient(circle at 68% 46%, rgba(150, 45, 112, 0.27), transparent 31%),
@@ -223,99 +237,78 @@ a:focus-visible {
 
 .tree-wrap {
   position: absolute;
+  z-index: 4;
   right: clamp(8vw, 14vw, 250px);
-  bottom: 10vh;
+  bottom: 7vh;
   width: clamp(260px, 31vw, 470px);
-  height: clamp(410px, 65vh, 650px);
+  height: clamp(430px, 69vh, 690px);
   filter: drop-shadow(0 35px 45px rgba(0, 0, 0, 0.34));
+  perspective: 1100px;
 }
 
-.tree { position: absolute; inset: 42px 0 55px; }
-
-.tree-layer {
+.tree-stage {
   position: absolute;
-  left: 50%;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  transform: translateX(-50%);
-  border-radius: 45%;
-  background: linear-gradient(135deg, #3f9f70 0%, #176044 60%, #0c3c30 100%);
-  box-shadow: inset -25px -14px 30px rgba(0, 0, 0, 0.16);
+  inset: 0 0 38px;
+  overflow: hidden;
+  border: 1px solid rgba(202, 255, 233, 0.1);
+  border-radius: 46% 46% 38% 38% / 30% 30% 14% 14%;
+  background:
+    radial-gradient(circle at 50% 80%, rgba(88, 212, 161, 0.11), transparent 34%),
+    radial-gradient(circle at 50% 42%, rgba(255, 229, 146, 0.055), transparent 50%);
+  box-shadow:
+    inset 0 -40px 70px rgba(0, 0, 0, 0.2),
+    0 25px 55px rgba(0, 0, 0, 0.22);
 }
 
-.layer-1 { top: 5%; width: 37%; height: 31%; }
-.layer-2 { top: 21%; width: 57%; height: 34%; }
-.layer-3 { top: 39%; width: 76%; height: 37%; }
-.layer-4 { top: 57%; width: 96%; height: 40%; }
-
-.tree-star {
-  position: absolute;
-  z-index: 5;
-  top: 0;
-  left: 50%;
-  color: #ffd66f;
-  font-size: clamp(42px, 5vw, 68px);
-  transform: translateX(-50%);
-  text-shadow: 0 0 25px #ffbd39, 0 0 50px rgba(255, 192, 67, 0.5);
-  animation: starPulse 1.8s ease-in-out infinite alternate;
-}
-
-@keyframes starPulse { to { transform: translateX(-50%) scale(1.13) rotate(8deg); } }
-
-.ornament {
-  position: absolute;
-  z-index: 3;
-  width: clamp(10px, 1.2vw, 17px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #ff6f79;
-  box-shadow: 0 0 11px currentColor;
-  animation: twinkle 1.7s ease-in-out infinite alternate;
-}
-
-.o1 { top: 28%; left: 46%; color: #ff6f79; }
-.o2 { top: 42%; left: 35%; color: #ffd96d; animation-delay: -0.5s; background: currentColor; }
-.o3 { top: 48%; right: 32%; color: #86d9ff; animation-delay: -0.9s; background: currentColor; }
-.o4 { top: 63%; left: 26%; color: #ff93bf; animation-delay: -0.2s; background: currentColor; }
-.o5 { top: 68%; right: 24%; color: #ffd96d; animation-delay: -1.1s; background: currentColor; }
-.o6 { top: 78%; left: 48%; color: #86d9ff; animation-delay: -0.7s; background: currentColor; }
-
-@keyframes twinkle { to { opacity: 0.35; transform: scale(0.7); } }
-
-.garland {
+#treeCanvas {
   position: absolute;
   z-index: 2;
-  left: 50%;
-  border-bottom: 3px solid #f5d37d;
-  border-radius: 50%;
-  transform: translateX(-50%) rotate(7deg);
-  opacity: 0.8;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
 }
 
-.garland-a { top: 45%; width: 55%; height: 13%; }
-.garland-b { top: 65%; width: 78%; height: 16%; transform: translateX(-50%) rotate(-6deg); }
+#treeCanvas.is-dragging { cursor: grabbing; }
 
-.trunk {
+.tree-ground {
   position: absolute;
-  bottom: 30px;
+  z-index: 1;
+  bottom: 2.5%;
   left: 50%;
-  width: 16%;
-  height: 70px;
-  transform: translateX(-50%);
-  border-radius: 5px;
-  background: #70452d;
-}
-
-.snow-bank {
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  width: 120%;
-  height: 58px;
+  width: 86%;
+  height: 10%;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: rgba(235, 248, 244, 0.9);
-  box-shadow: 0 -8px 35px rgba(222, 255, 248, 0.12);
+  background: radial-gradient(ellipse, rgba(239, 255, 250, 0.88), rgba(179, 227, 211, 0.17) 62%, transparent 72%);
+  filter: blur(1px);
+  pointer-events: none;
 }
+
+.interaction-hint {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: rgba(226, 255, 246, 0.52);
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.interaction-hint span {
+  display: inline-block;
+  margin-right: 7px;
+  color: var(--gold);
+  animation: hintSway 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes hintSway { to { transform: translateX(5px); } }
 
 .planet {
   position: absolute;
