@@ -540,15 +540,6 @@ a:focus-visible {
   font-style: normal;
 }
 
-.welcome small {
-  z-index: 1;
-  margin-top: 18px;
-  color: rgba(255, 255, 255, 0.32);
-  font-family: "Microsoft YaHei", sans-serif;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-}
-
 @media (max-width: 760px) {
   .topbar { padding: max(18px, env(safe-area-inset-top)) 18px 12px; }
   .brand { font-size: 11px; }
