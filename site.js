@@ -2,6 +2,7 @@
   "use strict";
 
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mobile = matchMedia("(max-width: 760px)").matches;
   const pages = document.getElementById("pages");
   const dots = [...document.querySelectorAll(".page-dot")];
   const nextButton = document.getElementById("nextButton");
