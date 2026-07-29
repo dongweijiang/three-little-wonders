@@ -19,7 +19,7 @@
 
   const tracks = [
     { uri: "spotify:track:1ivCIgrYZyE0BvItL4Z8lk", title: "告白气球 · 周杰伦" },
-    { uri: "spotify:track:3nzV6QV6le6BgkY16X1ll3", title: "Jingle Bells · Public Domain Music" },
+    { uri: "spotify:track:1D2VKBUzXO0EpNtmY0POJi", title: "Jingle Bells · Children Love to Sing" },
     { uri: "spotify:track:3Uw9U1f3PT7Qot9frhpPWX", title: "银河与星斗 · yihuik 苡慧" },
   ];
 
