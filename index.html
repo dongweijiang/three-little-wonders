@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#090611" />
     <title>三幕奇境 · 粒子宇宙</title>
-    <link rel="preconnect" href="https://open.spotify.com" />
     <link rel="stylesheet" href="./site.css" />
   </head>
   <body>
@@ -26,10 +25,6 @@
       <a class="brand" href="#scene-1" aria-label="返回第一幕">
         <span class="brand-mark">✦</span><span>三幕奇境</span>
       </a>
-      <button id="musicToggle" class="music-toggle" type="button" aria-label="暂停音乐" aria-pressed="true">
-        <span class="equalizer" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="music-label">音乐开启</span>
-      </button>
     </header>
 
     <div id="pages" class="pages">
@@ -89,18 +84,6 @@
       <button class="page-dot" data-page="2" type="button" aria-label="前往第三幕"><span>03</span></button>
     </aside>
 
-    <div id="musicDock" class="music-dock">
-      <div class="track-meta">
-        <span id="trackChapter">SCENE 01</span>
-        <strong id="trackTitle">告白气球 · 周杰伦</strong>
-      </div>
-      <div id="spotifyEmbed" class="spotify-embed"></div>
-      <p id="mobilePlayHint" class="mobile-play-hint">
-        <span aria-hidden="true">↑</span> 请直接点播放器里的播放键
-      </p>
-      <p id="musicStatus" class="music-status" aria-live="polite">开启旅程后加载音乐</p>
-    </div>
-
     <button id="nextButton" class="next-button" type="button" aria-label="前往下一幕">
       <span class="next-label">下一幕</span>
       <span class="next-arrow" aria-hidden="true">↓</span>
@@ -108,7 +91,6 @@
 
     <div class="swipe-hint" aria-hidden="true"><span></span>向上滑动</div>
 
-    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-    <script src="./site.js?v=5"></script>
+    <script src="./site.js?v=6"></script>
   </body>
 </html>
