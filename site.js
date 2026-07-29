@@ -18,9 +18,9 @@
   const spotifyEmbed = document.getElementById("spotifyEmbed");
 
   const tracks = [
-    { uri: "spotify:track:1ivCIgrYZyE0BvItL4Z8lk", title: "鍛婄櫧姘旂悆 路 鍛ㄦ澃浼? },
-    { uri: "spotify:track:3nzV6QV6le6BgkY16X1ll3", title: "Jingle Bells 路 Public Domain Music" },
-    { uri: "spotify:track:3Uw9U1f3PT7Qot9frhpPWX", title: "閾舵渤涓庢槦鏂?路 yihuik 鑻℃収" },
+    { uri: "spotify:track:1ivCIgrYZyE0BvItL4Z8lk", title: "告白气球 · 周杰伦" },
+    { uri: "spotify:track:3nzV6QV6le6BgkY16X1ll3", title: "Jingle Bells · Public Domain Music" },
+    { uri: "spotify:track:3Uw9U1f3PT7Qot9frhpPWX", title: "银河与星斗 · yihuik 苡慧" },
   ];
 
   let currentPage = 0;
@@ -50,8 +50,8 @@
 
     const last = currentPage === tracks.length - 1;
     nextButton.classList.toggle("is-last", last);
-    nextButton.setAttribute("aria-label", last ? "杩斿洖绗竴骞? : "鍓嶅線涓嬩竴骞?);
-    nextLabel.textContent = last ? "鍥炲埌寮€鍦? : "涓嬩竴骞?;
+    nextButton.setAttribute("aria-label", last ? "返回第一幕" : "前往下一幕");
+    nextLabel.textContent = last ? "回到开场" : "下一幕";
     trackChapter.textContent = `SCENE 0${currentPage + 1}`;
     trackTitle.textContent = tracks[currentPage].title;
     if (entered) loadTrack(currentPage);
@@ -66,18 +66,18 @@
         spotifyController = controller;
         controller.addListener("ready", () => {
           spotifyReady = true;
-          musicStatus.textContent = "闊充箰宸插氨缁紱鑻ユ湭鑷姩鎾斁锛岃鐐瑰嚮鎾斁鍣?;
+          musicStatus.textContent = "音乐已就绪；若未自动播放，请点击播放器";
           if (musicEnabled) controller.resume();
         });
         controller.addListener("playback_update", (event) => {
-          if (event?.data?.isPaused === false) musicStatus.textContent = "姝ｅ湪鎾斁瀹樻柟闊虫簮";
+          if (event?.data?.isPaused === false) musicStatus.textContent = "正在播放官方音源";
         });
       },
     );
   }
 
   function loadTrack(index) {
-    musicStatus.textContent = "姝ｅ湪鍒囨崲瀹樻柟闊虫簮鈥?;
+    musicStatus.textContent = "正在切换官方音源…";
     if (!spotifyController) return createSpotifyController();
     spotifyReady = false;
     spotifyController.loadUri(tracks[index].uri);
@@ -86,16 +86,16 @@
   function toggleMusic() {
     musicEnabled = !musicEnabled;
     musicToggle.setAttribute("aria-pressed", String(musicEnabled));
-    musicToggle.setAttribute("aria-label", musicEnabled ? "鏆傚仠闊充箰" : "寮€鍚煶涔?);
-    musicLabel.textContent = musicEnabled ? "闊充箰寮€鍚? : "闊充箰鏆傚仠";
+    musicToggle.setAttribute("aria-label", musicEnabled ? "暂停音乐" : "开启音乐");
+    musicLabel.textContent = musicEnabled ? "音乐开启" : "音乐暂停";
     musicDock.classList.toggle("is-muted", !musicEnabled);
     if (!spotifyController) return createSpotifyController();
     if (musicEnabled) {
       spotifyController.resume();
-      musicStatus.textContent = spotifyReady ? "姝ｅ湪鎾斁瀹樻柟闊虫簮" : "闊充箰鍔犺浇涓€?;
+      musicStatus.textContent = spotifyReady ? "正在播放官方音源" : "音乐加载中…";
     } else {
       spotifyController.pause();
-      musicStatus.textContent = "闊充箰宸叉殏鍋?;
+      musicStatus.textContent = "音乐已暂停";
     }
   }
 
